@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2.extras import execute_values
 import csv
 
+# TODO: Should pick from config
 conn = psycopg2.connect("dbname=aggio user=gauravbutola")
 cur = conn.cursor()
 
