@@ -1,3 +1,4 @@
+import os
 import psycopg2
 from psycopg2.extras import DictCursor
 from flask_cors import CORS
@@ -8,7 +9,10 @@ app = Flask(__name__)
 # XXX: Bad for production
 CORS(app)
 
-conn = psycopg2.connect("dbname=aggio user=gauravbutola")
+conn = psycopg2.connect(
+    'dbname=%s user=%s' %
+    (os.environ.get('DB_NAME'), os.environ.get('DB_USER'))
+)
 cur = conn.cursor(cursor_factory=DictCursor)
 
 

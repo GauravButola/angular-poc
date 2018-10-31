@@ -1,9 +1,12 @@
+import os
 import psycopg2
 from psycopg2.extras import execute_values
 import csv
 
-# TODO: Should pick from config
-conn = psycopg2.connect("dbname=aggio user=gauravbutola")
+conn = psycopg2.connect(
+    'dbname=%s user=%s' %
+    (os.environ.get('DB_NAME'), os.environ.get('DB_USER'))
+)
 cur = conn.cursor()
 
 
