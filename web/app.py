@@ -1,9 +1,12 @@
 import psycopg2
 from psycopg2.extras import DictCursor
-import json
-from flask import Flask, redirect
+from flask_cors import CORS
+from flask import Flask, redirect, jsonify
 
 app = Flask(__name__)
+
+# XXX: Bad for production
+CORS(app)
 
 conn = psycopg2.connect("dbname=aggio user=gauravbutola")
 cur = conn.cursor(cursor_factory=DictCursor)
@@ -26,7 +29,7 @@ def get_transactions():
             [i['quantity'] for i in data if i['item'] == item]
         )
 
-    return json.dumps(result)
+    return jsonify(result)
 
 
 if __name__ == '__main__':
